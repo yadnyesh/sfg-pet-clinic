@@ -23,10 +23,10 @@ public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetS
 		super.delete(object);
 	}
 	
-	@Override
-	public Pet save(Long id, Pet object) {
-		return super.save(id, object);
-	}
+//	@Override
+//	public Pet save(Pet object) {
+//		return super.save(object);
+//	}
 	
 	@Override
 	public Pet findById(Long id) {
