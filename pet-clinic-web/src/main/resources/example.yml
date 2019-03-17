@@ -1,0 +1,40 @@
+# this is a comment
+
+name: Yadnyesh
+
+names:
+  - Yadnyesh
+  - Bindiya
+  - Varada
+  - Bharat
+  - Smita
+
+pound_sign: "#"
+
+book:
+  author: Joe Buck
+  publisher: random house
+
+
+truth: yes
+
+another_truth: True
+
+more_true: true
+
+false: no, #No, false, FALSE
+
+string_val: This is a string
+
+colon_string: "colon:string"
+
+include_new_lines: |
+  asdf
+  asdfhk
+  asdfthwk
+
+
+ignore_new_lines: >
+  this will
+  be treated as
+  one line
