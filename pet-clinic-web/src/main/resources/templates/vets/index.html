@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'vets')}">
 <head>
 	<meta charset="UTF-8"/>
 	<title>List of Vets</title>
@@ -11,6 +11,7 @@
 <table id="vets" class="table table-striped">
 	<thead>
 	<tr>
+		<th>Id</th>
 		<th>Name</th>
 		<th>Specialties</th>
 	</tr>
