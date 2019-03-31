@@ -36,11 +36,11 @@ public class Owner extends Person {
 		this.telephone = telephone;
 	}
 	
-	public Set<Pet> getPet() {
+	public Set<Pet> getPets() {
 		return pet;
 	}
 	
-	public void setPet(Set<Pet> pet) {
+	public void setPets(Set<Pet> pet) {
 		this.pet = pet;
 	}
 }
