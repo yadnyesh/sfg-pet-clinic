@@ -11,7 +11,7 @@ public class SpecialtyServiceMap extends AbstractMapService<Specialty, Long> imp
 	
 	@Override
 	public Set<Specialty> findAll() {
-		super.findAll();
+		return super.findAll();
 	}
 	
 	@Override
