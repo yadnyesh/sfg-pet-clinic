@@ -32,6 +32,13 @@ public class DataLoader implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+		int countPetType = petTypeService.findAll().size();
+		if(countPetType == 0) {
+			loadData();
+		}
+	}
+	
+	private void loadData() {
 		PetType dog = new PetType();
 		dog.setName("Dog");
 		PetType savedDogPetType = petTypeService.save(dog);
@@ -40,7 +47,6 @@ public class DataLoader implements CommandLineRunner {
 		PetType savedCatPetType = petTypeService.save(cat);
 		
 		System.out.println("Successfully Loaded Pets.....");
-		
 		
 		Speciality radiology = new Speciality();
 		radiology.setDescription("Radiology");
