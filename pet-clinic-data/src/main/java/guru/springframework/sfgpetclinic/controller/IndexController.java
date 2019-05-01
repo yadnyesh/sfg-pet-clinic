@@ -1,29 +1,33 @@
 package guru.springframework.sfgpetclinic.controller;
 
-import guru.springframework.sfgpetclinic.model.Category;
-import guru.springframework.sfgpetclinic.model.UnitOfMeasure;
 import guru.springframework.sfgpetclinic.repository.CategoryRepository;
 import guru.springframework.sfgpetclinic.repository.UnitOfMeasureRepository;
+import guru.springframework.sfgpetclinic.service.RecipeService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 //@Controller
 //@RestController
-//@RequestMapping("/recipe")
+@RestController
+@RequestMapping("/recipe")
 public class IndexController {
+	
+	private final RecipeService recipeService;
 	
 	private CategoryRepository categoryRepository;
 	private UnitOfMeasureRepository unitOfMeasureRepository;
 	
-	public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
+	public IndexController(RecipeService recipeService, CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
+		this.recipeService = recipeService;
 		this.categoryRepository = categoryRepository;
 		this.unitOfMeasureRepository = unitOfMeasureRepository;
 	}
 	
 	@RequestMapping({"","/","/recipeindex"})
-	public String getIndexPage() {
+	public String getIndexPage(Model model) {
+		model.addAttribute("recipes", recipeService.getRecipes());
 		return "index";
 	}
 }
