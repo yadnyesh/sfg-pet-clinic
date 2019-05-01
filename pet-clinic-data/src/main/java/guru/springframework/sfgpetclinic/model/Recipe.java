@@ -131,11 +131,11 @@ public class Recipe {
 		this.difficulty = difficulty;
 	}
 	
-	public Set<Category> getCagtegories() {
+	public Set<Category> getCategories() {
 		return categories;
 	}
 	
-	public void setCagtegories(Set<Category> cagtegories) {
+	public void setCategories(Set<Category> cagtegories) {
 		this.categories = cagtegories;
 	}
 }
