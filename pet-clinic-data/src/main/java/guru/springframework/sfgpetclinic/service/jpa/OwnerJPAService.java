@@ -8,7 +8,6 @@ import guru.springframework.sfgpetclinic.service.OwnerService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -35,19 +34,10 @@ public class OwnerJPAService implements OwnerService {
         return super.equals(obj);
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 
     @Override
     public String toString() {
         return super.toString();
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
     }
 
     @Override
@@ -64,22 +54,21 @@ public class OwnerJPAService implements OwnerService {
 
     @Override
     public Owner findById(Long aLong) {
-        Optional<Owner> optionalOwner = ownerRepository.findById(aLong);
-        return optionalOwner.orElse(null);
+        return ownerRepository.findById(aLong).orElse(null);
     }
 
     @Override
     public Owner save(Owner object) {
-        return null;
+        return ownerRepository.save(object);
     }
 
     @Override
     public void delete(Owner object) {
-
+        ownerRepository.delete(object);
     }
 
     @Override
     public void deleteById(Long aLong) {
-
+        ownerRepository.deleteById(aLong);
     }
 }
