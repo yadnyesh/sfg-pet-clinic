@@ -29,10 +29,14 @@ class OwnerServiceMapTest {
 
     @Test
     void deleteById() {
+        ownerServiceMap.deleteById(ownerId);
+        assertEquals(0,ownerServiceMap.findAll().size());
     }
 
     @Test
     void delete() {
+        ownerServiceMap.delete(ownerServiceMap.findById(ownerId));
+        assertEquals(0,ownerServiceMap.findAll().size());
     }
 
     @Test
@@ -46,9 +50,15 @@ class OwnerServiceMapTest {
 
         Owner owner = Owner.builder().id(id).build();
         Owner savedOwner = ownerServiceMap.save(owner);
-
         assertEquals(id,savedOwner.getId());
+    }
 
+    @Test
+    void saveNoId() {
+        Owner owner = Owner.builder().id(10L).build();
+        Owner savedOwner = ownerServiceMap.save(owner);
+        assertNotNull(savedOwner);
+        assertNotNull(savedOwner.getId());
     }
 
     @Test
