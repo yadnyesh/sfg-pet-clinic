@@ -48,6 +48,13 @@ class OwnerServiceMapTest {
     }
 
     @Test
+    void findByLastNameNotFound() {
+
+        Owner smith = ownerServiceMap.findByLastName("NotFound");
+        assertNull(smith);
+    }
+
+    @Test
     void saveExistingId() {
 
         Long id = 2L;
