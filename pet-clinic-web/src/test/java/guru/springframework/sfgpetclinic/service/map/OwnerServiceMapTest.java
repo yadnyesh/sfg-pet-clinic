@@ -14,11 +14,12 @@ class OwnerServiceMapTest {
     OwnerServiceMap ownerServiceMap;
 
     final Long ownerId = 1L;
+    final String lastName = "Smith";
 
     @BeforeEach
     void setUp() {
         ownerServiceMap = new OwnerServiceMap(new PetTypeServiceMap(),new PetServiceMap());
-        ownerServiceMap.save(Owner.builder().id(ownerId).build());
+        ownerServiceMap.save(Owner.builder().id(ownerId).lastName(lastName).build());
     }
 
     @Test
@@ -41,6 +42,9 @@ class OwnerServiceMapTest {
 
     @Test
     void findByLastName() {
+        Owner smith = ownerServiceMap.findByLastName(lastName);
+        assertNotNull(smith);
+        assertEquals(1L, smith.getId().longValue());
     }
 
     @Test
