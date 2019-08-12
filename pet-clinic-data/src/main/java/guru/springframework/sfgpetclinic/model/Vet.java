@@ -1,5 +1,8 @@
 package guru.springframework.sfgpetclinic.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +12,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "vets")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Vet extends Person {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
