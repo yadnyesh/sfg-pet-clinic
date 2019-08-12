@@ -4,6 +4,7 @@ import guru.springframework.sfgpetclinic.model.Owner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.jws.Oneway;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -39,7 +40,15 @@ class OwnerServiceMapTest {
     }
 
     @Test
-    void save() {
+    void saveExistingId() {
+
+        Long id = 2L;
+
+        Owner owner = Owner.builder().id(id).build();
+        Owner savedOwner = ownerServiceMap.save(owner);
+
+        assertEquals(id,savedOwner.getId());
+
     }
 
     @Test
