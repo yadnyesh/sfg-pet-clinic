@@ -12,12 +12,19 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class OwnerJPAServiceTest {
+
+    Owner returnOwner;
 
     public static final String LAST_NAME = "Smith";
     @Mock
@@ -34,6 +41,7 @@ class OwnerJPAServiceTest {
 
     @BeforeEach
     void setUp() {
+        returnOwner = Owner.builder().id(1l).lastName(LAST_NAME).build();
     }
 
     @Test
@@ -46,21 +54,53 @@ class OwnerJPAServiceTest {
 
     @Test
     void findAll() {
+        Set<Owner> returnOwnersSet = new HashSet<>();
+        returnOwnersSet.add(Owner.builder().id(1l).build());
+        returnOwnersSet.add(Owner.builder().id(2l).build());
+
+        when(ownerRepository.findAll()).thenReturn(returnOwnersSet);
+
+        Set<Owner> owners = ownerJPAService.findAll();
+
+        assertNotNull(owners);
+        assertEquals(2, owners.size());
     }
 
     @Test
     void findById() {
+        when(ownerRepository.findById(anyLong())).thenReturn(Optional.of(returnOwner));
+
+        Owner owner = ownerJPAService.findById(1L);
+
+        assertNotNull(owner);
     }
 
     @Test
-    void save() {
+    void findByIdNotFound() {
+        when(ownerRepository.findById(anyLong())).thenReturn(Optional.empty());
+        Owner owner = ownerJPAService.findById(1L);
+        assertNull(owner);
     }
 
     @Test
     void delete() {
+        ownerJPAService.delete(returnOwner);
+        //default is 1 times
+        verify(ownerRepository, times(1)).delete(any());
     }
 
     @Test
     void deleteById() {
+        ownerJPAService.deleteById(1L);
+        verify(ownerRepository).deleteById(anyLong());
+    }
+
+    @Test
+    void save() {
+        Owner ownerToSave = Owner.builder().id(1L).build();
+        when(ownerRepository.save(any())).thenReturn(returnOwner);
+        Owner savedOwner = ownerJPAService.save(ownerToSave);
+        assertNotNull(savedOwner);
+        verify(ownerRepository).save(any());
     }
 }
