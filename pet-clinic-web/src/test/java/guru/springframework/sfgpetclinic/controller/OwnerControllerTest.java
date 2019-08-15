@@ -16,6 +16,7 @@ import java.util.Set;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -54,7 +55,18 @@ class OwnerControllerTest {
     }
 
     @Test
-    void findOwners() {
+    void listOwnersByIndex() throws Exception{
+        when(ownerService.findAll()).thenReturn(owners);
+        mockMvc.perform(get("/owners/index"))
+                .andExpect(status().is(200))
+                .andExpect(view().name("owners/index"))
+                .andExpect(model().attribute("owners", hasSize(2)));
+    }
 
+    @Test
+    void findOwners() throws Exception {
+        mockMvc.perform(get("/owners/find"))
+                .andExpect(view().name("notimplemented"));
+        verifyZeroInteractions(ownerService);
     }
 }
